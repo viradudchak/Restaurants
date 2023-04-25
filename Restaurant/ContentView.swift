@@ -12,6 +12,7 @@ struct ContentView: View {
     @State private var foodIsShowing: Bool = false
     @State private var drinksAreShowing: Bool = false
     @State private var colorIsShowing: Bool = false
+    @State private var textDestinationIsShowing: Bool = false
     
     var body: some View {
         NavigationStack(root: {
@@ -31,6 +32,13 @@ struct ContentView: View {
             })
             .navigationDestination(isPresented: $foodIsShowing, destination: {
                 Text("Food")
+                    .onTapGesture {
+                        textDestinationIsShowing = true
+                    }
+                    .padding()
+                    .navigationDestination(isPresented: $textDestinationIsShowing) {
+                        Text("another destination")
+                    }
             })
             .navigationDestination(isPresented: $drinksAreShowing, destination: {
                 Text("Drinks")
